@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const exercises = [
     { id: 1, name: 'truc1' },
-    { id: 10, name: "truc2" },
+    { id: 2, name: "truc2" },
     { id: 3, name: "truc3" }
 ]
 
@@ -18,13 +18,8 @@ app.get('/programs', (req, res) => {
 })
 
 app.get('/programs/:id', (req, res) => {
-    let truc;
-    exercises.forEach(element => {
-        if (element.id == req.params.id) {
-            truc = element
-        }
-    })
-    res.send(truc)
+    const id = req.params.id
+    res.send(exercises.find(exercise => exercise.id == id))
 })
 
 app.listen(port, () => {
