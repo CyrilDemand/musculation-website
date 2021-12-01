@@ -5,54 +5,34 @@ import ReactDOM from "react-dom";
 import Switch from "react-switch";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/Home";
+import { Button, Pane, Text, majorScale, toaster } from 'evergreen-ui'
+import Registration from './pages/Registration';
+import LogIn from './pages/LogIn';
+import Hi from './pages/Hi';
 
 const handleFieldChange = (fieldName, value, setUserInfo, userInfo) => {
   setUserInfo({...userInfo, [fieldName]: value}) // ...userInfo -> copie de userInfo
 }
 
 function App() {
-  const [userInfo, setUserInfo] = useState({})
-  const [home, setHome] = useState("")
-
-  useEffect(() =>{
-    axios.get("http://localhost:3001/home").then(function(response){
-      setHome(response.data)
-    })
-  }, [])
-
-  async function postName(e){
-    e.preventDefault()
-
-    try {
-      await axios.post("http://localhost:3001/userInfo", {
-        name: userInfo
-      }) 
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  console.log(userInfo)
-
   return (
     <Router>
       <div>
         <Link to="/home">Home</Link>
+        <Link to="/registration">Registration</Link>
+        <Link to="/logIn">LogIn</Link>
       </div>
       
       <Routes>
         <Route path="/home" element={<Home />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/logIn" element={<LogIn />} />
+        <Route path="/Hi" element={<Hi />} />
       </Routes>
         
       
     
     <div className="App">
-      <form onSubmit={postName}>
-        <input type="text" onChange={(e) => handleFieldChange('firstname' , e.target.value, setUserInfo, userInfo)}/>
-        <input type="text" onChange={(e) => handleFieldChange('lastname' , e.target.value, setUserInfo, userInfo)}/>
-        <button type="submit">Send Name</button>
-      </form>
-      {home}
     </div>
     </Router>
   );
