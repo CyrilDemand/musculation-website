@@ -70,9 +70,24 @@ app.post('/userInfo', (req, res)=>{
         firstname, 
         lastname 
     }).then(user => {
-        console.log("ça a marché (normalement)")
+        res.status(201).send(user)
     }).catch(err => {
-        console.log(err);
+        res.status(409).send(err)
+    });
+})
+
+app.post('/logIn', (req, res)=>{
+    const firstname = req.body.name.firstname
+    const lastname = req.body.name.lastname
+    console.log(firstname)
+    console.log(lastname)
+    User.find({ firstname: firstname, lastname: lastname }).then(user => {
+        console.log(user.length)
+        if(user.length>0){
+            res.status(201).send(user)
+        }
+    }).catch(err => {
+        res.status(409).send(err)
     });
 })
 
