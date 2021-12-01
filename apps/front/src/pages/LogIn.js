@@ -39,6 +39,7 @@ function App(){
     console.log(userInfo)
 
     return(<form onSubmit={postName}>
+        <h2>Log in</h2>
         <input type="text" onChange={(e) => handleFieldChange('firstname' , e.target.value, setUserInfo, userInfo)}/>
         <input type="text" onChange={(e) => handleFieldChange('lastname' , e.target.value, setUserInfo, userInfo)}/>
         <button type="submit">Send Name</button>

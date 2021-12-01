@@ -24,7 +24,7 @@ function App(){
         await axios.post("http://localhost:3001/userInfo", {
             name: userInfo
         }).then(() => {
-            toaster.success('message de succès')
+            toaster.success('Vous vous êtes bien connecté !')
         })
         } catch (error) {
         console.log(error)
@@ -33,7 +33,7 @@ function App(){
     
     console.log(userInfo)
 
-    return(<form onSubmit={postName}>
+    return(<form onSubmit={postName}><h2>Registration</h2>
         <input type="text" onChange={(e) => handleFieldChange('firstname' , e.target.value, setUserInfo, userInfo)}/>
         <input type="text" onChange={(e) => handleFieldChange('lastname' , e.target.value, setUserInfo, userInfo)}/>
         <button type="submit">Send Name</button>
